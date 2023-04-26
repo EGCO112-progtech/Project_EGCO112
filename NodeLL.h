@@ -6,6 +6,7 @@
 /*
 ========================================
    Stucture of Inheritance 22.04.2023
+          UPDATED 26.04.2023
 ========================================
 
                     NODE
@@ -34,7 +35,6 @@ class NODE {
         //void show_data();
         virtual ~NODE() = 0;
         virtual void show_data() = 0;
-        virtual void insert(NODE*&) = 0;
         //void insert(NODE*&);
         //NODE* move_next();
 };
@@ -45,9 +45,9 @@ class general:public NODE{
         long LotID, LotNo;
         string name;
         string mfg, exp;
-        string updateTime, deliveryBy;
+        string updateTime;
     public:
-        general(string, string, string, long = 0);
+        general(string = "No Name", string = "No MFG", string = "No EXP", long = 0);
         virtual ~general() = 0;
         virtual void show_data() = 0;;
 };
@@ -59,11 +59,9 @@ class consumable:public general{
         double weightAll;
         int quantityContainer, quantityEach;
     public:
-        consumable();
+        consumable(string = "No Name", string = "No MFG", string = "No EXP", long = 0, double = 0.0, int = 0,int = 0);
         virtual ~consumable() = 0;
         virtual void show_data() = 0;
-        virtual void insert(consumable*&) = 0;
-        consumable* move_next();
 };
 /*food:consumable*/
 class food:public consumable{
@@ -72,7 +70,7 @@ class food:public consumable{
     protected:
         double weightEach;
     public:
-        food();
+        food(string = "No Name", string = "No MFG", string = "No EXP", long = 0, double = 0.0, int = 0,int = 0, double = 0.0);
         ~food();
         void show_data();
         void insert(food*&);
@@ -85,7 +83,7 @@ class drinks:public consumable{
     protected:
         double volumeEach;
     public:
-        drinks();
+        drinks(string = "No Name", string = "No MFG", string = "No EXP", long = 0, double = 0.0, int = 0,int = 0, double = 0.0);
         ~drinks();
         void show_data();
         void insert( drinks*&);
@@ -100,10 +98,9 @@ class appliance:public general{
         double weightAll;
         int quantityContainer, quantityEach;
     public:
-        appliance();
+        appliance(string = "No Name", string = "No MFG", string = "No EXP", long = 0, string = "For non", double = 0.0, int = 0, int = 0);
         virtual ~appliance() = 0;
         virtual void show_data() = 0;
-        virtual void insert( drinks*&) = 0;
         appliance* move_next();
 };
 /*dailyUse: appliance*/
@@ -113,10 +110,10 @@ class dailyUse:public appliance{
     protected:
         string details;
     public:
-        dailyUse();
+        dailyUse(string = "No Name", string = "No MFG", string = "No EXP", long = 0, string = "For non", double = 0.0, int = 0, int = 0, string = "No detail");
         ~dailyUse();
         void show_data();
-        void insert( drinks*&);
+        void insert( dailyUse *&);
         dailyUse* move_next();
 };
 /*specificPurpose: appliance*/
@@ -126,10 +123,10 @@ class specificPurpose:public appliance{
     protected:
         string caution;
     public:
-        specificPurpose();
+        specificPurpose(string = "No Name", string = "No MFG", string = "No EXP", long = 0, string = "For non", double = 0.0, int = 0, int = 0, string = "No caution");
         ~specificPurpose();
         void show_data();
-        void insert( drinks*&);
+        void insert( specificPurpose*&);
         specificPurpose* move_next();
 };
 /*
@@ -138,7 +135,7 @@ food{
         long LotID, LotNo;
         string name;
         string mfg, exp;
-        string updateTime, deliveryBy;
+        string updateTime;
         double weightAll;
         int quantityContainer, quantityEach;
         double weightEach;
@@ -148,7 +145,7 @@ drinks{
         long LotID, LotNo;
         string name;
         string mfg, exp;
-        string updateTime, deliveryBy;
+        string updateTime;
         double weightAll;
         int quantityContainer, quantityEach;
         double volumeEach;
@@ -158,7 +155,7 @@ dailyUse{
         long LotID, LotNo;
         string name;
         string mfg, exp;
-        string updateTime, deliveryBy;
+        string updateTime;
         string Usefor;
         double weightAll;
         int quantityContainer, quantityEach;
@@ -169,7 +166,7 @@ specificPurpose{
         long LotID, LotNo;
         string name;
         string mfg, exp;
-        string updateTime, deliveryBy;
+        string updateTime;
         string Usefor;
         double weightAll;
         int quantityContainer, quantityEach;
@@ -177,16 +174,49 @@ specificPurpose{
 }
 */
 // <------------- LL ------------->
-
-class LL{
-      NODE*hol;
+/*LLFood*/
+class LLFood{
+      food *hol;
       int size;
 public:
-       void add_node(NODE*&);
+       void add_node(food *&);
        void show_all();
-       ~LL();
-       LL();
+       ~LLFood();
+       LLFood();
+      
+};
+/*LLDrinks*/
+class LLDrinks{
+      drinks *hol;
+      int size;
+public:
+       void add_node(drinks*&);
+       void show_all();
+       ~LLDrinks();
+       LLDrinks();
       
 };
 
+/*LLDai*/
+class LLDai{
+      dailyUse *hol;
+      int size;
+public:
+       void add_node(dailyUse *&);
+       void show_all();
+       ~LLDai();
+       LLDai();
+      
+};
+/*LLSpec*/
+class LLSpec{
+      specificPurpose *hol;
+      int size;
+public:
+       void add_node(specificPurpose *&);
+       void show_all();
+       ~LLSpec();
+       LLSpec();
+      
+};
 #endif
