@@ -5,7 +5,7 @@ using namespace std;
 bool dev = DEV_MODE;
 #include "NodeLL.cpp"
 int main(int argc, char **argv){
-    system("cls");
+    system("clear");
     int i;
     /////////////////////////////////////////
     int num_lines = 1; // number of data lines
@@ -32,7 +32,7 @@ int main(int argc, char **argv){
         cout << "Input number : "; cin >> choice;
         switch(choice){
             case 1 : //Load data
-                system("cls");
+                system("clear");
                 for(i = 0; i < num_lines; i++){
                     f = new food();             a.add_node(f);
                     dr = new drinks();          b.add_node(dr); 
@@ -42,7 +42,7 @@ int main(int argc, char **argv){
                 cout << "[!] Data has been loaded." << endl;
                 break;
             case 2 : //Showall
-                    system("cls");
+                    system("clear");
                     a.show_all();
                     b.show_all();
                     c.show_all();
@@ -53,7 +53,7 @@ int main(int argc, char **argv){
                     cin >> extra;
                     if(extra == "dev") dev = !dev;
                     else choice = 0;
-            default : system("cls");
+            default : system("clear");
         }
     }while(choice != 9);
     return 0;
